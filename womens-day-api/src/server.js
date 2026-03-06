@@ -18,7 +18,11 @@ async function bootstrap() {
       origin: true
     });
 
-    await app.register(multipart);
+    await app.register(multipart, {
+      limits: {
+        fileSize: 5 * 1024 * 1024 // 5MB
+      }
+    });
 
     app.get("/health", async () => {
       return { ok: true };
